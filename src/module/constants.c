@@ -1,0 +1,1 @@
+const char description[] = "Panteriza's Tic-Tac-Toe.";

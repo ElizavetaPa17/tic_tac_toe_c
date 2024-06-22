@@ -12,8 +12,8 @@ LDFLAGS := -lncurses
 
 all: $(BIN)
 
-$(BIN): main.o internal.o draw.o
-	$(CC) -o $(BIN) main.o internal.o draw.o $(LDFLAGS)
+$(BIN): main.o internal.o draw.o constants.o
+	$(CC) -o $(BIN) $? $(LDFLAGS)
 
 main.o: $(SRCDIR)/core/main.c 
 	$(info someinfo)
