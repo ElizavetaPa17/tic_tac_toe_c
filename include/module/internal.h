@@ -11,4 +11,6 @@ void setup_TTT();
 
 void quit_TTT();
 
+void process_menu_choice();
+
 #endif

@@ -8,7 +8,7 @@ BUILDDIR := build
 
 BIN := $(BINDIR)/tic-tac-toe
 INCLUDES := -I./$(HEADDIR)/module
-LDFLAGS := -lncurses
+LDFLAGS := -lncurses -lmenu -lpanel
 
 all: $(BIN)
 

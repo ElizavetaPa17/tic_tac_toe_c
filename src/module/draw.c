@@ -1,19 +1,8 @@
-#include <ncurses.h>
-#include <time.h>
-
 #include "constants.h"
 
 void clear_screen() {
     clear();
 }
-
-#define LABEL_WIDTH 33
-#define LABEL_HEIGHT 8
-#define BOARD_WIDTH 16
-#define BOARD_X_OFFET 11
-#define BOARD_Y_OFFSET 8
-
-struct timespec displaying_delay = { 1, 0 };
 
 /* 
 // Labels to draw
@@ -116,6 +105,13 @@ void draw_welcome_page() {
 
     refresh();
     nanosleep(&displaying_delay, NULL);
+}
+
+/**
+ Draw the menu page.
+ */
+void draw_menu_page() {
+    
 }
 
 /*
