@@ -27,15 +27,20 @@ int main(int argc, char *argv[]) {
                 menu_driver(menu, REQ_DOWN_ITEM);
                 break;
             }
-            case ENTER_CODE: {
+            case KEY_RIGHT: {
                 process_menu_choice();
                 break;
             }
-            default: {
-                mvprintw(LINES-2, 0, "Press arrows to navigate and Enter to choose.");
+            case KEY_LEFT: {
+                for (int i = 0; i < ITEM_COUNT; ++i) {
+                    hide_panel(panels_array[i]);
+                }
+
                 break;
             }
         }
+
+        clrtoeol();
     }
 
     quit_TTT();

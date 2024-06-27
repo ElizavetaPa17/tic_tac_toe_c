@@ -56,6 +56,10 @@ void quit_TTT() {
 void process_menu_choice() {
     ITEM* curr_item = current_item(menu);
 
+    for (int i = 0; i < ITEM_COUNT; ++i) {
+        hide_panel(panels_array[i]);
+    }
+
     void (*panel_func)(void);
     if (curr_item == menu_items_array[0]) { // PLAY GAME
         show_panel(panels_array[0]);
@@ -64,18 +68,63 @@ void process_menu_choice() {
         show_panel(panels_array[1]);
         panel_func = panel_userptr(panels_array[1]);
     } else {
-        show_panel(panels_array[2]);
         panel_func = panel_userptr(panels_array[2]);
     }
 
     panel_func();
+
+    update_panels();
+    doupdate();
 }
 
 void start_game() {
-    mvprintw(LINES-2, 0, "Start Game!");
+    clear();
+    char players_name[2][PLAYER_NAME_LENGTH];
+
+    for (int i = 0, result = 0; i < 2; ++i) {
+        move(LINES-2, 0);
+        clrtoeol();
+        printw("Player #%d, choose your name (less than 100 symbols): ", i);
+
+        while (True) {
+            result = getnstr(players_name[i], PLAYER_NAME_LENGTH);
+            switch (result) {
+                case ERR:
+                    mvprintw(LINES-2, 0, "Enter correct name less than 100 symbols!");
+                    continue;
+                case KEY_RESIZE: // resize window
+                    continue;
+                case OK:
+                    goto success_name_input;                    
+            }
+        }
+
+    success_name_input:
+        clrtoeol();
+        continue;
+    }
+
+    mvprintw(LINES-2, 0, "%s and %s, let's start our game! Enter when you become ready!", players_name[0], players_name[1]);
+    clear();
+
+    mvprintw(LINES-3, 0, "%s, you will use tic!", players_name[0]);
+    mvprintw(LINES-2, 0, "%s, you will use tac-toe!", players_name[1]);
+    getch();
+
+    clear();
+
+    for (int i = 1; ; ++i) {
+        if (i & 1) { // the first player attempt
+            mvprintw(LINES-2, 0, "%s, this is your turn!", players_name[0]);
+        } else { // the second player attempt
+            mvprintw(LINES-2, 0, "%s, this is your turn!", players_name[1]);
+        }
+    }
 }
 
 void display_statistics() {
+    clean_information();
+
     mvprintw(LINES-2, 0, "Display Statistics!");
 }
 
@@ -102,6 +151,6 @@ void setup_pannels() {
 
 void setup_windows() {
     for (int i  = 0; i < ITEM_COUNT; ++i) {
-        windows_array[i] = newwin(100, 100, 5, 5);
+        windows_array[i] = newwin(LINES/1.5, COLS/2, 5, 5);
     }
 }

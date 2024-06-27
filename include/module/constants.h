@@ -20,7 +20,14 @@ extern const char description[];
 #define BOARD_X_OFFET 11
 #define BOARD_Y_OFFSET 8
 
+#define PLAYER_NAME_LENGTH 100
+
 #define ENTER_CODE 10
+
+enum {
+    False, 
+    True
+};
 
 extern struct timespec displaying_delay;
 
@@ -32,5 +39,7 @@ extern MENU*  menu;
 
 extern WINDOW* windows_array[ITEM_COUNT];
 extern PANEL*  panels_array[ITEM_COUNT];
+
+extern char board[3][3];
 
 #endif

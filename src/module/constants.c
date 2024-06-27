@@ -15,3 +15,11 @@ MENU*  menu = NULL;
 
 WINDOW* windows_array[ITEM_COUNT];
 PANEL*  panels_array[ITEM_COUNT];
+
+// 0 is equal to tac-toe
+// 1 is equal to tic
+char board[3][3] = {
+    0, 0, 0,
+    0, 0, 0,
+    0, 0, 0
+};
